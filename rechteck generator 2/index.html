@@ -32,7 +32,6 @@
 
   
   top: 12%;
-  border-style: solid;
 " id="mybox">
 
   </div>
@@ -41,14 +40,14 @@
 
 <script>
   var urlw = new URL(window.location.href);
-  var texturl = urlw.searchParams.get("w");
-  document.getElementById("breite").value = texturl;
+  var texturl_w = urlw.searchParams.get("w");
+  document.getElementById("breite").value = texturl_w;
 
   var urlh = new URL(window.location.href);
-  var texturl = urlh.searchParams.get("h");
-  document.getElementById("hoehe").value = texturl;
+  var texturl_h = urlh.searchParams.get("h");
+  document.getElementById("hoehe").value = texturl_h;
 
-  if ( urlw != 0 || urlh != 0) {
+  if ( texturl_w != null || texturl_h != null) {
     addBoxWithParams();
   }
   
@@ -96,16 +95,17 @@
   function addBoxWithParams(w, h) {
     var scaledw=w/1;
     var scaledh=h/1;
-    mybox.style.width = scaledw + "px";
-    mybox.style.height = scaledh + "px";
-    var box = document.createElement("Rechteck");
+    var box = document.createElement("div");
+    box.style.width = scaledw + "px";
+    box.style.height = scaledh + "px";
+    box.style.borderStyle = "solid";
     document.getElementById("mybox").appendChild(box);
   }
 
   function addbox() {
     var h = document.getElementById("hoehe").value;
     var w = document.getElementById("breite").value;
-    addBoxWithParams(w, h);
+    addBoxWithParams(w,h);
   }
 </script>
 
