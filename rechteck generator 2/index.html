@@ -103,6 +103,8 @@
     box.style.width = scaledw + "px";
     box.style.height = scaledh + "px";
     box.style.borderStyle = "solid";
+    box.style.borderColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' +
+      (Math.floor(Math.random() * 256)) + ')';
     document.getElementById("mybox").appendChild(box);
   }
 
