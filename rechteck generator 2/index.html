@@ -10,10 +10,13 @@
   <input class="hoehe" id="hoehe" type="number" placeholder="Höhe für die Box">
   <input class="breite" id="breite" type="number" placeholder="Breite für die Box">
   <input onclick="addbox()" id="addbox" type="button" value="Add">
+  <input onclick="removeall()" id="removeall" type="button" value="Alle entfernen">
   <b>Generierte Rechtecke:</b>
- 
-  <p id="a"><b>Größenvorlagen:</b></p>
-  
+
+  <p id="a">
+    <b>Größenvorlagen:</b>
+  </p>
+
   <input onclick="a3hoch()" id="a3hoch" type="button" value="A3 (hoch)">
   <input onclick="a3quer()" id="a3quer" type="button" value="A3 (quer)">
 
@@ -47,14 +50,15 @@
   var texturl_h = urlh.searchParams.get("h");
   document.getElementById("hoehe").value = texturl_h;
 
-  if ( texturl_w != null || texturl_h != null) {
+  if (texturl_w != null || texturl_h != null) {
     addBoxWithParams();
   }
-  
+
 
   function a3hoch() {
     addBoxWithParams(842, 1191);
   }
+
   function a3quer() {
     addBoxWithParams(1191, 842);
   }
@@ -78,7 +82,7 @@
   function res1() {
     addBoxWithParams(640, 360);
   }
-  
+
   function res2() {
     addBoxWithParams(1280, 720);
   }
@@ -88,13 +92,13 @@
   }
 
   function res4() {
-      addBoxWithParams(3840, 2160);
+    addBoxWithParams(3840, 2160);
   }
 
-  
+
   function addBoxWithParams(w, h) {
-    var scaledw=w/1;
-    var scaledh=h/1;
+    var scaledw = w / 1;
+    var scaledh = h / 1;
     var box = document.createElement("div");
     box.style.width = scaledw + "px";
     box.style.height = scaledh + "px";
@@ -105,7 +109,11 @@
   function addbox() {
     var h = document.getElementById("hoehe").value;
     var w = document.getElementById("breite").value;
-    addBoxWithParams(w,h);
+    addBoxWithParams(w, h);
+  }
+
+  function removeall() {
+    document.getElementById("mybox").innerHTML = "";
   }
 </script>
 
