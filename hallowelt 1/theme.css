@@ -1,0 +1,22 @@
+#button {
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #34d997;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  text-align: center;
+  		
+}
+
+#button:hover {
+  background: #2aa171;
+  text-decoration: none;
+}
+
+.btn {
+  text-align: center;
+}

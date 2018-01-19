@@ -1,0 +1,156 @@
+<html>
+
+<head>
+  <title>Rechteck Generator</title>
+</head>
+
+<body>
+
+
+  <input class="hoehe" id="hoehe" type="number" placeholder="Höhe für die Box">
+  <input class="breite" id="breite" type="number" placeholder="Breite für die Box">
+  <input onclick="box()" id="button" type="button" value="Generieren">
+ 
+  <p>Größenvorlagen:</p>
+  
+  <input onclick="a3hoch()" id="a3hoch" type="button" value="A3 (hoch)">
+  <input onclick="a3quer()" id="a3quer" type="button" value="A3 (quer)">
+
+  <input onclick="a4hoch()" id="a4hoch" type="button" value="A4 (hoch)">
+  <input onclick="a4quer()" id="a4quer" type="button" value="A4 (quer)">
+
+  <input onclick="a5hoch()" id="a5hoch" type="button" value="A5 (hoch)">
+  <input onclick="a5quer()" id="a5quer" type="button" value="A5 (quer)">
+
+  <input onclick="res1()" id="360p" type="button" value="360p">
+  <input onclick="res2()" id="720p" type="button" value="720p (HD)">
+  <input onclick="res3()" id="1080p" type="button" value="1080p (FULL HD)">
+  <input onclick="res4()" id="2160p" type="button" value="2160p (4K)">
+
+  <div style="position: absolute;
+
+  
+  top: 12%;
+  background: red;
+" id="mybox">
+
+  </div>
+
+</body>
+
+<script>
+  var urlw = new URL(window.location.href);
+  var texturl = urlw.searchParams.get("w");
+  document.getElementById("breite").value = texturl;
+
+  var urlh = new URL(window.location.href);
+  var texturl = urlh.searchParams.get("h");
+  document.getElementById("hoehe").value = texturl;
+
+  if ( urlw != 0 || urlh != 0) {
+    box();
+  }
+  
+  
+  
+  function box() {
+    var h = document.getElementById("hoehe").value;
+    var w = document.getElementById("breite").value;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function a3hoch() {
+    var h = 1191
+    var w = 842
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function a3quer() {
+    var w = 1191;
+    var h = 842;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function a4hoch() {
+    var h =  842;
+    var w = 595;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function a4quer() {
+    var w = 842;
+    var h = 595;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function a5hoch() {
+    var h =  595;
+    var w = 420;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function a5quer() {
+    var w = 595;
+    var h = 420;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function res1() {
+    var w = 640;
+    var h = 360;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+  
+  function res2() {
+    var w = 1280;
+    var h = 720;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function res3() {
+    var w = 1920;
+    var h = 1080;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function res4() {
+    var w = 3840;
+    var h = 2160;
+    mybox.style.width = w + "px";
+    mybox.style.height = h + "px";
+    var box = document.createElement("Reckteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+</script>
+
+</html>

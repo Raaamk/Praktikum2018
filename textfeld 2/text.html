@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>HalloWelt</title>
+<link rel="stylesheet" type="text/css" href="theme.css">
+</head
+<body>
+<input class="textfeld "id="textfeld" type="text" placeholder="Namen bitte eingeben">
+<input onclick="Alert()" id="button" type="button" value="OK">
+</body>
+<script>
+function Alert() {
+var text = document.getElementById("textfeld").value;
+if (text == 0) {
+  alert("Sie haben keinen Namen angegeben");
+} else {
+  alert("Hallo, " + text);
+}
+document.getElementById("textfeld").value = "";
+ 
+}
+
+</script>
+</html>

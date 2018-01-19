@@ -1,0 +1,112 @@
+<html>
+
+<head>
+  <title>Rechteck Generator</title>
+</head>
+
+<body>
+
+
+  <input class="hoehe" id="hoehe" type="number" placeholder="Höhe für die Box">
+  <input class="breite" id="breite" type="number" placeholder="Breite für die Box">
+  <input onclick="addbox()" id="addbox" type="button" value="Add">
+  <b>Generierte Rechtecke:</b>
+ 
+  <p id="a"><b>Größenvorlagen:</b></p>
+  
+  <input onclick="a3hoch()" id="a3hoch" type="button" value="A3 (hoch)">
+  <input onclick="a3quer()" id="a3quer" type="button" value="A3 (quer)">
+
+  <input onclick="a4hoch()" id="a4hoch" type="button" value="A4 (hoch)">
+  <input onclick="a4quer()" id="a4quer" type="button" value="A4 (quer)">
+
+  <input onclick="a5hoch()" id="a5hoch" type="button" value="A5 (hoch)">
+  <input onclick="a5quer()" id="a5quer" type="button" value="A5 (quer)">
+
+  <input onclick="res1()" id="360p" type="button" value="360p">
+  <input onclick="res2()" id="720p" type="button" value="720p (HD)">
+  <input onclick="res3()" id="1080p" type="button" value="1080p (FULL HD)">
+  <input onclick="res4()" id="2160p" type="button" value="2160p (4K)">
+
+  <div style="position: absolute;
+
+  
+  top: 12%;
+  border-style: solid;
+" id="mybox">
+
+  </div>
+
+</body>
+
+<script>
+  var urlw = new URL(window.location.href);
+  var texturl = urlw.searchParams.get("w");
+  document.getElementById("breite").value = texturl;
+
+  var urlh = new URL(window.location.href);
+  var texturl = urlh.searchParams.get("h");
+  document.getElementById("hoehe").value = texturl;
+
+  if ( urlw != 0 || urlh != 0) {
+    addBoxWithParams();
+  }
+  
+
+  function a3hoch() {
+    addBoxWithParams(842, 1191);
+  }
+  function a3quer() {
+    addBoxWithParams(1191, 842);
+  }
+
+  function a4hoch() {
+    addBoxWithParams(595, 842);
+  }
+
+  function a4quer() {
+    addBoxWithParams(842, 595);
+  }
+
+  function a5hoch() {
+    addBoxWithParams(420, 595);
+  }
+
+  function a5quer() {
+    addBoxWithParams(595, 420);
+  }
+
+  function res1() {
+    addBoxWithParams(640, 360);
+  }
+  
+  function res2() {
+    addBoxWithParams(1280, 720);
+  }
+
+  function res3() {
+    addBoxWithParams(1920, 1080);
+  }
+
+  function res4() {
+      addBoxWithParams(3840, 2160);
+  }
+
+  
+  function addBoxWithParams(w, h) {
+    var scaledw=w/1;
+    var scaledh=h/1;
+    mybox.style.width = scaledw + "px";
+    mybox.style.height = scaledh + "px";
+    var box = document.createElement("Rechteck");
+    document.getElementById("mybox").appendChild(box);
+  }
+
+  function addbox() {
+    var h = document.getElementById("hoehe").value;
+    var w = document.getElementById("breite").value;
+    addBoxWithParams(w, h);
+  }
+</script>
+
+</html>
