@@ -105,6 +105,7 @@
     var neuecheckbox = document.createElement("input");
     neuecheckbox.type = "checkbox";
     neuecheckbox.checked = "checked";
+    neuecheckbox.onchange = "checkbox()" ;
     document.getElementById("checkboxliste").appendChild(neuecheckbox);
     var scaledw = w / 1;
     var scaledh = h / 1;
