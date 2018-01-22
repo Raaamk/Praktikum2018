@@ -11,7 +11,10 @@
   <input class="breite" id="breite" type="number" placeholder="Breite für die Box">
   <input onclick="addbox()" id="addbox" type="button" value="Add">
   <input onclick="removeall()" id="removeall" type="button" value="Alle entfernen">
-  <b>Generierte Rechtecke:</b>
+  <p><b>Generierte Rechtecke:</b></p>
+
+  <ul id="checkboxliste">
+  </ul>
 
   <p id="a">
     <b>Größenvorlagen:</b>
@@ -31,10 +34,12 @@
   <input onclick="res3()" id="1080p" type="button" value="1080p (FULL HD)">
   <input onclick="res4()" id="2160p" type="button" value="2160p (4K)">
 
+  
+
   <div style="position: absolute;
 
   
-  top: 12%;
+  top: 20%;
 " id="mybox">
 
   </div>
@@ -97,6 +102,9 @@
 
 
   function addBoxWithParams(w, h) {
+    var neuecheckbox = document.createElement("input");
+    neuecheckbox.type = "checkbox";
+    document.getElementById("checkboxliste").appendChild(neuecheckbox);
     var scaledw = w / 1;
     var scaledh = h / 1;
     var box = document.createElement("div");
@@ -120,6 +128,7 @@
     document.getElementById("mybox").innerHTML = "";
     document.getElementById("hoehe").value = "";
     document.getElementById("breite").value = "";
+    document.getElementById("checkboxliste").innerHTML = "";
   }
 </script>
 
