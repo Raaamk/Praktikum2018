@@ -14,6 +14,7 @@
   <p><b>Generierte Rechtecke:</b></p>
 
   <ul id="checkboxliste">
+    
   </ul>
 
   <p id="a">
@@ -36,12 +37,7 @@
 
   
 
-  <div style="position: absolute;
-
-  
-  top: 20%;
-" id="mybox">
-
+  <div id="mybox">
   </div>
 
 </body>
@@ -100,23 +96,53 @@
     addBoxWithParams(3840, 2160);
   }
 
+  var id = 0
 
   function addBoxWithParams(w, h) {
+    var iderstellen = id++;
+    var li = document.createElement("li");
     var neuecheckbox = document.createElement("input");
+    li.appendChild(neuecheckbox);
+    var neuertext = document.createElement("span");
+    li.appendChild(neuertext);
+    var deleteone = document.createElement("input");
+    li.appendChild(deleteone);
+    
+    deleteone.type = "image";
+    deleteone.src = "https://n6-img-fp.akamaized.net/freie-ikonen/papierkorb_318-70077.jpg?size=338&ext=jpg";
+    deleteone.style.height = "15px";
+    deleteone.style.width = "15px";
+    deleteone.onclick
+
+    neuecheckbox.appendChild(document.createElement("div"));
     neuecheckbox.type = "checkbox";
     neuecheckbox.checked = "checked";
-    neuecheckbox.onchange = "checkbox()" ;
-    document.getElementById("checkboxliste").appendChild(neuecheckbox);
+    neuecheckbox.onclick= function () {
+      var check = document.getElementById("checkbox" + iderstellen).checked
+      if (check == true) {
+        box.style.visibility = "visible";
+      } else {
+        box.style.visibility = "hidden";
+      }
+    };
     var scaledw = w / 1;
     var scaledh = h / 1;
+    
+    neuecheckbox.id = "checkbox" + iderstellen;
+    neuertext.innerText = "Element" + iderstellen + ": Rechteck W="
+     + scaledw + ", H=" + scaledh;
+    document.getElementById("checkboxliste").appendChild(li);
+    
     var box = document.createElement("div");
+    
     box.style.width = scaledw + "px";
     box.style.height = scaledh + "px";
     box.style.borderStyle = "solid";
-    box.style.borderColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' +
-      (Math.floor(Math.random() * 256)) + ')';
+    box.id = "box" + iderstellen;
+    box.style.borderColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' 
+    + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
     document.getElementById("mybox").appendChild(box);
-  }
+   }
 
   function addbox() {
     var h = document.getElementById("hoehe").value;
@@ -132,6 +158,8 @@
     document.getElementById("breite").value = "";
     document.getElementById("checkboxliste").innerHTML = "";
   }
+
+  
 </script>
 
 </html>
