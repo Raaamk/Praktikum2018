@@ -11,7 +11,7 @@
   <input class="breite" id="breite" type="number" placeholder="Breite für die Box">
   <input onclick="addbox()" id="addbox" type="button" value="Add">
   <input onclick="removeall()" id="removeall" type="button" value="Alle entfernen">
-  <p><b>Generierte Rechtecke:</b></p>
+  <p id="generated" style="visibility: hidden;"><b>Generierte Rechtecke:</b></p>
 
   <ul id="checkboxliste">
     
@@ -99,6 +99,9 @@
   var id = 0
 
   function addBoxWithParams(w, h) {
+    var generated = document.getElementById("generated");
+    generated.style.visibility = "visible";
+
     var iderstellen = id++;
     var li = document.createElement("li");
     var neuecheckbox = document.createElement("input");
@@ -107,12 +110,22 @@
     li.appendChild(neuertext);
     var deleteone = document.createElement("input");
     li.appendChild(deleteone);
+    li.id = "li" + iderstellen;
     
     deleteone.type = "image";
     deleteone.src = "https://n6-img-fp.akamaized.net/freie-ikonen/papierkorb_318-70077.jpg?size=338&ext=jpg";
     deleteone.style.height = "15px";
     deleteone.style.width = "15px";
-    deleteone.onclick
+    deleteone.onclick = function () {
+      if (confirm("Dieses Element wird nun entfernt!")) {
+        var removeli = document.getElementById("li" + iderstellen);
+      removeli.remove();
+      var removebox = document.getElementById("box" + iderstellen);
+      removebox.remove();
+      } else {
+
+      }
+    }
 
     neuecheckbox.appendChild(document.createElement("div"));
     neuecheckbox.type = "checkbox";
@@ -151,12 +164,14 @@
   }
 
   function removeall() {
-    /*var childtoremove = document.getElementById("mybox").firstChild;
-    document.getElementById("mybox").removeChild(childtoremove);*/
-    document.getElementById("mybox").innerHTML = "";
-    document.getElementById("hoehe").value = "";
-    document.getElementById("breite").value = "";
-    document.getElementById("checkboxliste").innerHTML = "";
+    if (confirm("Es werden nun alle Elemente entfernt!")) {
+      document.getElementById("mybox").innerHTML = "";
+      document.getElementById("hoehe").value = "";
+      document.getElementById("breite").value = "";
+      document.getElementById("checkboxliste").innerHTML = "";
+    } else {
+
+    }
   }
 
   
