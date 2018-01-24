@@ -20,17 +20,25 @@
 
     </body>
     <script>
-        
-        var hclient = document.body.clientHeight;
-        var wclient = document.body.clientWidth;
-        var h = hclient-50;
-        var w = wclient-50;
-        var box = document.getElementById("box");
-        box.style.height = h;
-        box.style.width = w;
+         var initPlayground = function(event) {
+            var hclient = document.body.clientHeight;
+            var wclient = document.body.clientWidth;
+            var h = hclient-58;
+            var w = wclient-30;
+            var box = document.getElementById("box");
+            box.style.height = h;
+            box.style.width = w;
+        }
 
-        box.addEventListener("click", getClickPosition1, false);
-        function getClickPosition1(e) {
+        window.onresize = function(event) {
+            initPlayground();
+        }
+        
+        initPlayground();
+        
+
+        box.addEventListener("click", getClickPosition, false);
+        function getClickPosition(e) {
                     var xPos = e.clientX;
                     var yPos = e.clientY;
                     var selected = document.getElementById("formauswahl").value;
