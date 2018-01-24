@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///C:/Users/JanitscM/Documents/Internetseite/geist%20folgt%20click/index.html",
+            "url": "file:///C:/Users/JanitscM/Documents/Internetseite/geist%20bewegt%20such%20random/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
