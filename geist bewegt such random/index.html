@@ -4,11 +4,11 @@
     </head>
 
     <body>
-            
+            <div id="x">Hallo</div>
             <div id="box" style="border-style: solid;">
-                <span id="punkte1">Punkte:</span>
+                <b id="punkte1">Punkte:</b>
                 <span id="punkte"></span>
-                <span id="timer1">Timer:</span>
+                <b id="timer1">Timer:</b>
                 <span id="timer"></span>
                 
                 <img src="http://www.ukcouch.de/wp-content/uploads/2012/11/geist-transparent-300x186.png" 
@@ -20,6 +20,13 @@
                 <p><b>Spiel ist vorbei!</b></p>
                 <span>Deine Punktzahl:</span>
                 <span id="endpunktzahl"></span>
+                <p><input type="button" value="Nochmal!" id="restart" onclick="restart()"></p>
+            </div>
+
+            <div id="start" style="background-color: rgb(118, 118, 199); position: absolute; top: 0px; left: 0px;">
+                <p><b>Geist Spiel</b></p>
+                <span>Klicke auf den Geist um Punkte zu bekommen!</span>
+                <p><input type="button" value="Spiel starten!" id="restart" onclick="start()"></p>
             </div>
             
             
@@ -28,14 +35,24 @@
     </body>
 
     <script>
+
         var hidden = document.getElementById("end");
         hidden.style.visibility = "hidden";
         var hiddenbox = document.getElementById("box");
-        hiddenbox.style.visibility = "visible";
+        hiddenbox.style.visibility = "hidden";
+        var hiddenstart = document.getElementById("start");
+        hiddenstart.style.visibility = "visible";
+
         var currentposx = 10;
         var currentposy = 10;
         var richtung = Math.floor(Math.random() * 4);
         
+        function start() {
+            hiddenstart.style.visibility = "hidden";
+            hiddenbox.style.visibility = "visible";
+            timer = 15;
+            counter = 1;
+        }
 
         var repositionGhostRandom = function() {
             // Richtung ändern, aber nur mit x% Wahrscheilichkeit
@@ -128,10 +145,14 @@
             var w = wclient-20;
             var box = document.getElementById("box");
             var ende = document.getElementById("end");
+            var anfang = document.getElementById("start");
             box.style.height = h;
             box.style.width = w;
             ende.style.height = hclient;
             ende.style.width = wclient;
+            anfang.style.height = hclient;
+            anfang.style.width = wclient;
+            
         }
         
         initPlayground();
@@ -164,6 +185,15 @@
         }
 
         countdown();
+
+        function restart() {
+            timer = 15;
+            document.getElementById("punkte").innerText = "0";
+            hidden.style.visibility = "hidden";
+            hiddenbox.style.visibility = "visible";
+            counter = 1
+
+        }
     
     </script>
 
