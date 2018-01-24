@@ -16,16 +16,34 @@
 
     <script>
         
-        var currentposx = 500;
-        var currentposy = 500;
+        var currentposx = 10;
+        var currentposy = 10;
         var richtung = Math.floor(Math.random() * 4);
         
 
         var repositionGhostRandom = function() {
             // Richtung ändern, aber nur mit x% Wahrscheilichkeit
-            var sollRichtungAendern = Math.random() > 0.98 ? true : false;
+            var sollRichtungAendern = Math.random() > 0.99 ? true : false;
              
             // if (altkey gedrueckt) sollRichtungAendern = true;
+
+            var hclient = document.body.clientHeight;
+            var wclient = document.body.clientWidth;
+            var h = hclient-22;
+            var w = wclient-20;
+
+            if (currentposx > (w-60)) {
+                richtung = 1;
+            }
+            if (currentposx < 10) {
+                richtung = 0;
+            }
+            if (currentposy > (h-55)) {
+                richtung = 3;
+            }
+            if (currentposy < 10) {
+                richtung = 2;
+            }
 
 
             if (sollRichtungAendern)
