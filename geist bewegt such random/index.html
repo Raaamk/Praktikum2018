@@ -1,23 +1,37 @@
 <html>
     <head>
-        <title>Der Geist folgt deinem Mausklick</title>
+        <title>Geist Spiel</title>
     </head>
 
     <body>
             
             <div id="box" style="border-style: solid;">
+                <span id="punkte1">Punkte:</span>
+                <span id="punkte"></span>
+                <span id="timer1">Timer:</span>
+                <span id="timer"></span>
+                
                 <img src="http://www.ukcouch.de/wp-content/uploads/2012/11/geist-transparent-300x186.png" 
                 id="geist" style="height: 60px; width: 75px; position: absolute;" onclick="treffer()">
-                <span>Punkte:</span>
-                <span id="punkte"></span>
+            
             </div>
+
+            <div id="end" style="background-color: rgb(118, 118, 199); position: absolute; top: 0px; left: 0px;">
+                <p><b>Spiel ist vorbei!</b></p>
+                <span>Deine Punktzahl:</span>
+                <span id="endpunktzahl"></span>
+            </div>
+            
             
 
     
     </body>
 
     <script>
-        
+        var hidden = document.getElementById("end");
+        hidden.style.visibility = "hidden";
+        var hiddenbox = document.getElementById("box");
+        hiddenbox.style.visibility = "visible";
         var currentposx = 10;
         var currentposy = 10;
         var richtung = Math.floor(Math.random() * 4);
@@ -113,19 +127,43 @@
             var h = hclient-22;
             var w = wclient-20;
             var box = document.getElementById("box");
+            var ende = document.getElementById("end");
             box.style.height = h;
             box.style.width = w;
+            ende.style.height = hclient;
+            ende.style.width = wclient;
         }
         
         initPlayground();
         
-        var counter = 1
+        var counter = 1;
         document.getElementById("punkte").innerText = "0";
 
         function treffer() {
             var punkte = counter++;
             document.getElementById("punkte").innerText = punkte;
+            document.getElementById("endpunktzahl").innerText = punkte;
         }
+
+        
+        
+
+        var timer = 15;
+        document.getElementById("timer").innerText = "30";
+
+        function countdown() {
+            var countertimer = timer--;
+            document.getElementById("timer").innerText = countertimer;
+            setTimeout(countdown, 1000);
+
+            if (countertimer <= 0) {
+                document.getElementById("timer").innerText = "0";
+                hidden.style.visibility = "visible";
+                hiddenbox.style.visibility = "hidden";
+            }
+        }
+
+        countdown();
     
     </script>
 
