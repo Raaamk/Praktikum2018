@@ -4,12 +4,14 @@
     </head>
 
     <body>
+            
             <div id="box" style="border-style: solid;">
                 <img src="http://www.ukcouch.de/wp-content/uploads/2012/11/geist-transparent-300x186.png" 
-                id="geist" style="height: 60px; width: 75px; position: absolute;">
+                id="geist" style="height: 60px; width: 75px; position: absolute;" onclick="treffer()">
+                <span>Punkte:</span>
+                <span id="punkte"></span>
             </div>
             
-
 
     
     </body>
@@ -90,7 +92,7 @@
             repositionGhost();
            }
 
-            setTimeout(repositionGhostRandom, 10);
+            setTimeout(repositionGhostRandom, 0.1);
         }
 
         var repositionGhost = function() {
@@ -99,7 +101,7 @@
             box.style.top = currentposy;
         }
 
-        setTimeout(repositionGhostRandom, 500);
+        setTimeout(repositionGhostRandom, 1);
         
         
         window.onresize = function(event) {
@@ -116,7 +118,14 @@
         }
         
         initPlayground();
-    
+        
+        var counter = 1
+        document.getElementById("punkte").innerText = "0";
+
+        function treffer() {
+            var punkte = counter++;
+            document.getElementById("punkte").innerText = punkte;
+        }
     
     </script>
 
