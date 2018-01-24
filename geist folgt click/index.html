@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>Der Geist folgt deinem Mausklick</title>
+    </head>
+
+    <body>
+            <div id="box" style="border-style: solid;">
+                <img src="http://www.ukcouch.de/wp-content/uploads/2012/11/geist-transparent-300x186.png" 
+                id="geist" style="height: 60px; width: 75px; position: absolute;">
+            </div>
+            
+
+
+    
+    </body>
+
+    <script>
+        
+        var currentposx = 500;
+        var currentposy = 500;
+        var richtung = Math.floor(Math.random() * 4);
+        
+
+        var repositionGhostRandom = function() {
+            // Richtung ändern, aber nur mit x% Wahrscheilichkeit
+            var sollRichtungAendern = Math.random() > 0.98 ? true : false;
+             
+            // if (altkey gedrueckt) sollRichtungAendern = true;
+
+
+            if (sollRichtungAendern)
+            {
+                richtung = Math.floor(Math.random() * 4);
+            }            
+
+           if (richtung == 0) {
+            xPos = currentposx + 1;
+            yPos = currentposy;
+
+            currentposx = xPos;
+            currentposy = yPos;
+            
+            repositionGhost();
+           }
+
+           if (richtung == 1) {
+            xPos = currentposx -1;
+            yPos = currentposy;
+
+            currentposx = xPos;
+            currentposy = yPos;
+            
+            repositionGhost();
+           }
+
+           if (richtung == 2) {
+            xPos = currentposx;
+            yPos = currentposy +1;
+
+            currentposx = xPos;
+            currentposy = yPos;
+            
+            repositionGhost();
+           }
+
+           if (richtung == 3) {
+            xPos = currentposx;
+            yPos = currentposy -1;
+
+            currentposx = xPos;
+            currentposy = yPos;
+            
+            repositionGhost();
+           }
+
+            setTimeout(repositionGhostRandom, 10);
+        }
+
+        var repositionGhost = function() {
+            var box = document.getElementById("geist");
+            box.style.left = currentposx;
+            box.style.top = currentposy;
+        }
+
+        setTimeout(repositionGhostRandom, 500);
+        
+        
+        window.onresize = function(event) {
+            initPlayground();
+        }
+        var initPlayground = function(event) {
+            var hclient = document.body.clientHeight;
+            var wclient = document.body.clientWidth;
+            var h = hclient-22;
+            var w = wclient-20;
+            var box = document.getElementById("box");
+            box.style.height = h;
+            box.style.width = w;
+        }
+        
+        initPlayground();
+    
+    
+    </script>
+
+
+</html>
+
