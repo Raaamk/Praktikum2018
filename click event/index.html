@@ -5,7 +5,7 @@
 
     </head>
     <body id="body">
-        <select id="formauswahl" onclick="auswahl(this.value)">
+        <select id="formauswahl">
             <option disabled="disabled" selected="selected">Wähle ein Objekt</option>
             <option>Kreis</option>
             <option>Rechteck</option>
@@ -29,59 +29,46 @@
         box.style.height = h;
         box.style.width = w;
 
-        function auswahl(select) {
-            var selected = document.getElementById("formauswahl").value;
-            if (select == "Kreis") {
-                box.addEventListener("click", getClickPosition, false);
-                function getClickPosition(e) {
-                    var xPos = e.clientX - 25;
-                    var yPos = e.clientY - 25;
-                    var kreis = document.createElement("div");
-                    box.appendChild(kreis);
-                    kreis.style.position = "absolute";
-                    kreis.style.height = "50px";
-                    kreis.style.width = "50px";
-                    kreis.style.top = yPos;
-                    kreis.style.left = xPos;
-                    kreis.style.backgroundColor = "red";
-                    kreis.style.borderRadius = "25px";
-                }
-            }
-            if (select == "Rechteck") {
-                box.addEventListener("click", getClickPosition, false);
-                function getClickPosition(e) {
-                    var xPos = e.clientX - 10;
-                    var yPos = e.clientY- 25;
-                    var rechteck = document.createElement("div");
-                    box.appendChild(rechteck);
-                    rechteck.style.position = "absolute";
-                    rechteck.style.height = "50px";
-                    rechteck.style.width = "20px";
-                    rechteck.style.top = yPos;
-                    rechteck.style.left = xPos;
-                    rechteck.style.backgroundColor = "red";
-                }
-            }
-            if (select == "Quadrat") {
-                box.addEventListener("click", getClickPosition, false);
-                function getClickPosition(e) {
-                    var xPos = e.clientX - 15;
-                    var yPos = e.clientY - 15;
-                    var quadrat = document.createElement("div");
+        box.addEventListener("click", getClickPosition1, false);
+        function getClickPosition1(e) {
+                    var xPos = e.clientX;
+                    var yPos = e.clientY;
+                    var selected = document.getElementById("formauswahl").value;
+
+                    if (selected == "Kreis") {
+                        var kreis = document.createElement("div");
+                        box.appendChild(kreis);
+                        kreis.style.position = "absolute";
+                        kreis.style.height = "50px";
+                        kreis.style.width = "50px";
+                        kreis.style.top = yPos - 25;
+                        kreis.style.left = xPos - 25;
+                        kreis.style.backgroundColor = "red";
+                        kreis.style.borderRadius = "25px";
+                    }
+
+                    if (selected == "Rechteck") {
+                        var rechteck = document.createElement("div");
+                        box.appendChild(rechteck);
+                        rechteck.style.position = "absolute";
+                        rechteck.style.height = "50px";
+                        rechteck.style.width = "20px";
+                        rechteck.style.top = yPos - 25;
+                        rechteck.style.left = xPos - 10;
+                        rechteck.style.backgroundColor = "red";
+                    }
+
+                    if (selected == "Quadrat") {
+                        var quadrat = document.createElement("div");
                     box.appendChild(quadrat);
                     quadrat.style.position = "absolute";
                     quadrat.style.height = "30px";
                     quadrat.style.width = "30px";
-                    quadrat.style.top = yPos;
-                    quadrat.style.left = xPos;
+                    quadrat.style.top = yPos - 15;
+                    quadrat.style.left = xPos - 15;
                     quadrat.style.backgroundColor = "red";
-                }
-            }                        
+                    }
         }
-
-        
-    
-    
     
     </script>
 
