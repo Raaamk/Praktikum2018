@@ -40,7 +40,7 @@
     </body>
 
     <script>
-        
+        var timer = 15;
         function keintreffer() {
             var audio = new Audio('nohit.mp3');
             audio.play();
@@ -73,6 +73,7 @@
             timer = 15;
             counter = 1;
             document.getElementById("box").style.cursor = "url('cur.cur'), auto";
+            countdown();
         }
 
         var repositionGhostRandom = function() {
@@ -209,7 +210,6 @@
             }
         }
 
-        countdown();
 
         function restart() {
             timer = 15;
