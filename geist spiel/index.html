@@ -32,6 +32,7 @@
                 <p><b>Geist Spiel</b></p>
                 <span>Klicke auf den Geist um Punkte zu bekommen!</span>
                 <p><input type="button" value="Spiel starten!" id="restart" onclick="start()"></p>
+                <input type="text" placeholder="Dein Name" id="name">
             </div>
             
             
@@ -67,13 +68,20 @@
         var currentposy = 10;
         var richtung = Math.floor(Math.random() * 4);
         
+        
         function start() {
-            hiddenstart.style.visibility = "hidden";
-            hiddenbox.style.visibility = "visible";
-            timer = 15;
-            counter = 1;
-            document.getElementById("box").style.cursor = "url('cur.cur'), auto";
-            countdown();
+            var nameInput = document.getElementById("name");
+            var name = nameInput.value;
+            if (name == null || name.length < 1) {
+                alert("Du musst erst einen Namen angeben, damit du das Spiel starten kannst!")
+            } else {
+                hiddenstart.style.visibility = "hidden";
+                hiddenbox.style.visibility = "visible";
+                timer = 15;
+                counter = 1;
+                document.getElementById("box").style.cursor = "url('cur.cur'), auto";
+                countdown();
+            }
         }
 
         var repositionGhostRandom = function() {
