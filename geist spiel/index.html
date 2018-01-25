@@ -4,14 +4,14 @@
     </head>
 
     <body>
-            <div id="box" style="border-style: solid;">
+            <div id="box" style="border-style: solid;" onclick="keintreffer()">
                 <b id="punkte1">Punkte:</b>
                 <span id="punkte"></span>
                 <b id="timer1">Timer:</b>
                 <span id="timer"></span>
                 
                 <img src="http://www.ukcouch.de/wp-content/uploads/2012/11/geist-transparent-300x186.png" 
-                id="geist" style="height: 60px; width: 75px; position: absolute;" onclick="treffer()">
+                id="geist" style="height: 60px; width: 75px; position: absolute;" onclick="treffer(window.event)">
             
             </div>
 
@@ -34,6 +34,22 @@
     </body>
 
     <script>
+        
+        function keintreffer() {
+            var audio = new Audio('nohit.mp3');
+            audio.play();
+            audio.volume = 0.5;
+        }
+        
+        var music = function() {
+            var audio = new Audio('music.mp3');
+            audio.play();
+            audio.volume = 0.2;
+            setTimeout(music, 189000);
+        }
+        
+        setTimeout(music, 1);
+        
         var hidden = document.getElementById("end");
         hidden.style.visibility = "hidden";
         var hiddenbox = document.getElementById("box");
@@ -159,10 +175,14 @@
         var counter = 1;
         document.getElementById("punkte").innerText = "0";
 
-        function treffer() {
+        function treffer( ev) {
             var punkte = counter++;
             document.getElementById("punkte").innerText = punkte;
             document.getElementById("endpunktzahl").innerText = punkte;
+            var audio = new Audio('hit.mp3');
+            audio.play();
+
+            ev.stopPropagation();
         }
 
         
