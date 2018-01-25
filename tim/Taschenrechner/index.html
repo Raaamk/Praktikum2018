@@ -1,0 +1,224 @@
+<html>
+
+<head>
+  <title> Taschenrechner </title>
+
+  <body>
+    <h1>
+      <p align="center"> Taschenrechner </p>
+      <h1>
+        <form>
+          <label for="ergebnisfeld">
+            <p align="center">
+              <label for="Ergebnisfeld">
+                <input type="text" id="Ergebnisfeld" name="Feld" value="0">
+            </p>
+            </label>
+            <br></br>
+
+            <label for="number1">
+              <p align="center" </p>
+                <input style="height: 100px; width: 100px;" value="1" type="button" id="Eins" name="1">
+            </label>
+
+            <label fpr="number2">
+              <input style="height: 100px; width: 100px;" value="2" type="button" id="Zwei" name="2">
+            </label>
+
+            <label fpr="number3">
+              <input style="height: 100px; width: 100px;" value="3" type="button" id="Drei" name="3">
+            </label>
+
+            <label fpr="+">
+              <input style="height: 100px; width: 100px;" value="+" type="button" id="Plus" name="+">
+            </label>
+
+            <br></br>
+
+            <label fpr="number4">
+              <input style="height: 100px; width: 100px;" value="4" type="button" id="Vier" name="4">
+            </label>
+
+            <label fpr="number5">
+              <input style="height: 100px; width: 100px;" value="5" type="button" id="Fünf" name="5">
+            </label>
+
+            <label fpr="number6">
+              <input style="height: 100px; width: 100px;" value="6" type="button" id="Sechs" name="6">
+            </label>
+
+            <label fpr="-">
+              <input style="height: 100px; width: 100px;" value="-" type="button" id="Minus" name="-">
+            </label>
+
+            <br></br>
+            <label fpr="number7">
+              <input style="height: 100px; width: 100px;" value="7" type="button" id="Sieben" name="7">
+            </label>
+
+            <label fpr="number8">
+              <input style="height: 100px; width: 100px;" value="8" type="button" id="Acht" name="8">
+            </label>
+
+
+            <label fpr="number9">
+              <input style="height: 100px; width: 100px;" value="9" type="button" id="Neun" name="9">
+            </label>
+
+            <label fpr=".">
+              <input style="height: 100px; width: 100px;" value="." type="button" id="Dezimalpunkt" name=".">
+            </label>
+
+            <br></br>
+            <label fpr="/">
+              <input style="height: 100px; width: 100px;" value="/" type="button" id="Dividieren" name="/">
+            </label>
+
+            <label fpr="0">
+              <input style="height: 100px; width: 100px;" value="0" type="button" id="null" name="0">
+            </label>
+
+            <label fpr="*">
+              <input style="height: 100px; width: 100px;" value="*" type="button" id="Multiplizieren" name="*">
+            </label>
+
+            <label fpr="=">
+              <input style="height: 100px; width: 100px;" value="=" type="button" id="Ergebnis" name="=">
+            </label>
+
+
+
+   
+
+
+
+
+        </form>
+
+  </body>
+
+  <script>
+    document.getElementsByTagName("h1")[0].style.fontSize = "80px";
+
+
+
+    var ele1 = document.getElementById('Eins')
+    var ele2 = document.getElementById('Zwei')
+    var ele3 = document.getElementById('Drei')
+    var ele4 = document.getElementById('Vier')
+    var ele5 = document.getElementById('Fünf')
+    var ele6 = document.getElementById('Sechs')
+    var ele7 = document.getElementById('Sieben')
+    var ele8 = document.getElementById('Acht')
+    var ele9 = document.getElementById('Neun')
+    var elePlus = document.getElementById('Plus')
+    var eleMinus = document.getElementById('Minus')
+    var eleMultiplizieren = document.getElementById('Multiplizieren')
+    var eleDividieren = document.getElementById('Dividieren')
+    var eleDisplay = document.getElementById('Ergebnisfeld')
+    var eleGleich = document.getElementById('Ergebnis')
+
+
+    var currentValue = 0
+    var savedValue = 0
+    var operator = "+"
+    var operator1 = "-"
+
+
+
+
+
+
+
+
+    function handleGleich() {
+      var ergebnis;
+      if (operator == "+") ergebnis = savedValue + currentValue
+      if (operator == "-") ergebnis = savedValue - currentValue
+      if (operator == "*") ergebnis = savedValue * currentValue
+      if (operator == "/") ergebnis = savedValue / currentValue
+
+      setCurrentValue(ergebnis)
+    }
+
+    function handleNumber(n) {
+      currentValue = currentValue * 10 + n
+      console.log("X:", currentValue)
+      setCurrentValue(currentValue);
+    }
+
+
+    function setCurrentValue(val) {
+      currentValue = val;
+      eleDisplay.setAttribute("value", currentValue)
+    }
+
+
+
+    function handleOperator(op) {
+      operator = op;
+      // wert merken
+      savedValue = currentValue;
+
+      setCurrentValue(0)
+
+    }
+
+
+
+
+
+
+    ele1.addEventListener('click', function () {
+      handleNumber(1)
+    })
+    ele2.addEventListener('click', function () {
+      handleNumber(2)
+    })
+    ele3.addEventListener('click', function () {
+      handleNumber(3)
+    })
+    ele4.addEventListener('click', function () {
+      handleNumber(4)
+    })
+    ele5.addEventListener('click', function () {
+      handleNumber(5)
+    })
+    ele6.addEventListener('click', function () {
+      handleNumber(6)
+    })
+    ele7.addEventListener('click', function () {
+      handleNumber(7)
+    })
+    ele8.addEventListener('click', function () {
+      handleNumber(8)
+    })
+    ele9.addEventListener('click', function () {
+      handleNumber(9)
+    })
+    elePlus.addEventListener('click', function () {
+      handleOperator("+")
+    })
+    eleMinus.addEventListener('click', function () {
+      handleOperator("-")
+    })
+    eleMultiplizieren.addEventListener('click', function () {
+      handleOperator("*")
+
+    })
+    eleDividieren.addEventListener('click', function () {
+      handleOperator("/")
+    })
+    eleGleich.addEventListener('click', handleGleich);
+    eleGleich1.addEventListener('click', handleGleich1);
+  </script>
+
+  <style>
+    body {
+      background-color: #a3d5d3;
+    }
+
+    #Ergebnisfeld {
+      font-size: 65px;
+    }
+  </style>
