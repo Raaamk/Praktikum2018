@@ -34,7 +34,6 @@
     </body>
 
     <script>
-
         var hidden = document.getElementById("end");
         hidden.style.visibility = "hidden";
         var hiddenbox = document.getElementById("box");
@@ -51,6 +50,7 @@
             hiddenbox.style.visibility = "visible";
             timer = 15;
             counter = 1;
+            document.getElementById("box").style.cursor = "url('cur.cur'), auto";
         }
 
         var repositionGhostRandom = function() {
@@ -168,7 +168,7 @@
         
         
 
-        var timer = 15;
+        timer = 15;
         document.getElementById("timer").innerText = "30";
 
         function countdown() {
