@@ -66,7 +66,7 @@
             </label>
 
             <label fpr=".">
-              <input style="height: 100px; width: 100px;" value="." type="button" id="Dezimalpunkt" name=".">
+              <input style="height: 100px; width: 100px;" value="c" type="reset" id="Löschen" name="c">
             </label>
 
             <br></br>
@@ -75,7 +75,7 @@
             </label>
 
             <label fpr="0">
-              <input style="height: 100px; width: 100px;" value="0" type="button" id="null" name="0">
+              <input style="height: 100px; width: 100px;" value="0" type="button" id="Null" name="0">
             </label>
 
             <label fpr="*">
@@ -88,7 +88,7 @@
 
 
 
-   
+
 
 
 
@@ -101,7 +101,7 @@
     document.getElementsByTagName("h1")[0].style.fontSize = "80px";
 
 
-
+    var ele0 = document.getElementById('Null')
     var ele1 = document.getElementById('Eins')
     var ele2 = document.getElementById('Zwei')
     var ele3 = document.getElementById('Drei')
@@ -115,6 +115,7 @@
     var eleMinus = document.getElementById('Minus')
     var eleMultiplizieren = document.getElementById('Multiplizieren')
     var eleDividieren = document.getElementById('Dividieren')
+    var eleLöschen = document.getElementById('Löschen')
     var eleDisplay = document.getElementById('Ergebnisfeld')
     var eleGleich = document.getElementById('Ergebnis')
 
@@ -123,7 +124,8 @@
     var savedValue = 0
     var operator = "+"
     var operator1 = "-"
-
+    var operatorpressed = false;
+    var cpressed = false;
 
 
 
@@ -142,7 +144,13 @@
     }
 
     function handleNumber(n) {
-      currentValue = currentValue * 10 + n
+
+      if (operatorpressed == true) {
+        currentValue = n
+
+      } else {
+        currentValue = currentValue * 10 + n
+      }
       console.log("X:", currentValue)
       setCurrentValue(currentValue);
     }
@@ -156,18 +164,19 @@
 
 
     function handleOperator(op) {
+      operatorpressed = true;
       operator = op;
       // wert merken
       savedValue = currentValue;
 
-      setCurrentValue(0)
+
 
     }
 
 
-
-
-
+    ele0.addEventListener('click', function () {
+      handleNumber(0)
+    })
 
     ele1.addEventListener('click', function () {
       handleNumber(1)
@@ -209,8 +218,10 @@
     eleDividieren.addEventListener('click', function () {
       handleOperator("/")
     })
+    eleLöschen.addEventListener('click', function () {
+      handleLöschen("c")
+    })
     eleGleich.addEventListener('click', handleGleich);
-    eleGleich1.addEventListener('click', handleGleich1);
   </script>
 
   <style>
