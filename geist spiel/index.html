@@ -1,235 +1,277 @@
 <html>
-    <head>
-        <title>Geist Spiel</title>
-    </head>
 
-    <body>
-            <div id="box" style="border-style: solid;" onclick="keintreffer()" style="-ms-user-select: None; 
+<head>
+    <title>Geist Spiel</title>
+</head>
+
+<body>
+    <!--Spielbreich!-->
+    <div id="box" style="border-style: solid;" onclick="keintreffer()" style="-ms-user-select: None; 
             -moz-user-select: None; -webkit-user-select: None; user-select: None;">
-                <b id="punkte1" style="-ms-user-select: None; 
+        <b id="punkte1" style="-ms-user-select: None; 
                 -moz-user-select: None; -webkit-user-select: None; user-select: None;">Punkte:</b>
-                <span id="punkte" style="-ms-user-select: None; 
+        <span id="punkte" style="-ms-user-select: None; 
                 -moz-user-select: None; -webkit-user-select: None; user-select: None;"></span>
-                <b id="timer1" style="-ms-user-select: None; 
+        <b id="timer1" style="-ms-user-select: None; 
                 -moz-user-select: None; -webkit-user-select: None; user-select: None;">Timer:</b>
-                <span id="timer" style="-ms-user-select: None; 
+        <span id="timer" style="-ms-user-select: None; 
                 -moz-user-select: None; -webkit-user-select: None; user-select: None;"></span>
-                
-                <img src="http://www.ukcouch.de/wp-content/uploads/2012/11/geist-transparent-300x186.png" 
-                id="geist" style="height: 60px; width: 75px; position: absolute; -ms-user-select: None; 
-                 -moz-user-select: None; -webkit-user-select: None; user-select: None; " onclick="treffer(window.event)" draggable="false">
-            
-            </div>
 
-            <div id="end" style="background-color: rgb(118, 118, 199); position: absolute; top: 0px; left: 0px;">
-                <p><b>Spiel ist vorbei!</b></p>
-                <span>Deine Punktzahl:</span>
-                <span id="endpunktzahl"></span>
-                <p><input type="button" value="Nochmal!" id="restart" onclick="restart()"></p>
-            </div>
+        <img src="geist.png" id="geist" style="height: 60px; width: 75px; position: absolute; -ms-user-select: None; 
+                 -moz-user-select: None; -webkit-user-select: None; user-select: None; " onclick="treffer(window.event)"
+            draggable="false">
 
-            <div id="start" style="background-color: rgb(118, 118, 199); position: absolute; top: 0px; left: 0px;">
-                <p><b>Geist Spiel</b></p>
-                <span>Klicke auf den Geist um Punkte zu bekommen!</span>
-                <p><input type="button" value="Spiel starten!" id="restart" onclick="start()"></p>
-                <input type="text" placeholder="Dein Name" id="name">
-            </div>
-            
-            
+    </div>
+    <!--Endscreen!-->
+    <div id="end" style="background-color: rgb(118, 118, 199); position: absolute; top: 0px; left: 0px;">
+        <p>
+            <b>Spiel ist vorbei!</b>
+        </p>
+        <span>Deine Punktzahl:</span>
+        <span id="endpunktzahl"></span>
+        <p>
+            <input type="button" value="Nochmal!" id="restart" onclick="restart()">
+        </p>
+        <b>Highscore </b>
+        <span>von</span>
+        <b id="nameend"></b>
+        <span>mit</span>
+        <b id="punkteend"></b>
+        <span>Punkten!</span>
+    </div>
+    <!--Startscreen!-->
+    <div id="start" style="background-color: rgb(118, 118, 199); position: absolute; top: 0px; left: 0px;">
+        <p>
+            <b>Geist Spiel</b>
+        </p>
+        <span>Klicke auf den Geist um Punkte zu bekommen!</span>
+        <p>
+            <input type="button" value="Spiel starten!" id="restart" onclick="start()">
+        </p>
+        <input type="text" placeholder="Dein Name" id="name">
+    </div>
 
-    
-    </body>
 
-    <script>
-        var timer = 15;
-        function keintreffer() {
-            var audio = new Audio('nohit.mp3');
-            audio.play();
-            audio.volume = 0.5;
+
+
+</body>
+
+<script>
+    var timer;
+
+    function keintreffer() {
+        var audio = new Audio('nohit.mp3');
+        audio.play();
+        audio.volume = 0.5;
+    }
+
+    var music = function () {
+        var audio = new Audio('music.mp3');
+        audio.play();
+        audio.volume = 0.2;
+        setTimeout(music, 189000);
+    }
+
+    setTimeout(music, 1);
+
+    var hidden = document.getElementById("end");
+    hidden.style.visibility = "hidden";
+    var hiddenbox = document.getElementById("box");
+    hiddenbox.style.visibility = "hidden";
+    var hiddenstart = document.getElementById("start");
+    hiddenstart.style.visibility = "visible";
+
+    var currentposx = 10;
+    var currentposy = 10;
+    var richtung = Math.floor(Math.random() * 4);
+
+
+    function start() {
+        var name = document.getElementById("name").value;
+        timer = 15;
+        if (name == null || name.length < 1) {
+            alert("Du musst erst einen Namen angeben, damit du das Spiel starten kannst!")
+        } else {
+            hiddenstart.style.visibility = "hidden";
+            hiddenbox.style.visibility = "visible";
+            timer = 15;
+            counter = 1;
+            document.getElementById("box").style.cursor = "url('cur.cur'), auto";
         }
-        
-        var music = function() {
-            var audio = new Audio('music.mp3');
-            audio.play();
-            audio.volume = 0.2;
-            setTimeout(music, 189000);
-        }
-        
-        setTimeout(music, 1);
-        
-        var hidden = document.getElementById("end");
-        hidden.style.visibility = "hidden";
-        var hiddenbox = document.getElementById("box");
-        hiddenbox.style.visibility = "hidden";
-        var hiddenstart = document.getElementById("start");
-        hiddenstart.style.visibility = "visible";
+    }
 
-        var currentposx = 10;
-        var currentposy = 10;
-        var richtung = Math.floor(Math.random() * 4);
-        
-        
-        function start() {
-            var nameInput = document.getElementById("name");
-            var name = nameInput.value;
-            if (name == null || name.length < 1) {
-                alert("Du musst erst einen Namen angeben, damit du das Spiel starten kannst!")
-            } else {
-                hiddenstart.style.visibility = "hidden";
-                hiddenbox.style.visibility = "visible";
-                timer = 15;
-                counter = 1;
-                document.getElementById("box").style.cursor = "url('cur.cur'), auto";
-                countdown();
-            }
+    var repositionGhostRandom = function () {
+        // Richtung ändern, aber nur mit x% Wahrscheilichkeit
+        var sollRichtungAendern = Math.random() > 0.99 ? true : false;
+
+
+        var hclient = document.body.clientHeight;
+        var wclient = document.body.clientWidth;
+        var h = hclient - 22;
+        var w = wclient - 20;
+
+        if (currentposx > (w - 60)) {
+            richtung = 1;
+        }
+        if (currentposx < 10) {
+            richtung = 0;
+        }
+        if (currentposy > (h - 55)) {
+            richtung = 3;
+        }
+        if (currentposy < 10) {
+            richtung = 2;
         }
 
-        var repositionGhostRandom = function() {
-            // Richtung ändern, aber nur mit x% Wahrscheilichkeit
-            var sollRichtungAendern = Math.random() > 0.99 ? true : false;
-             
 
-            var hclient = document.body.clientHeight;
-            var wclient = document.body.clientWidth;
-            var h = hclient-22;
-            var w = wclient-20;
+        if (sollRichtungAendern) {
+            richtung = Math.floor(Math.random() * 4);
+        }
 
-            if (currentposx > (w-60)) {
-                richtung = 1;
-            }
-            if (currentposx < 10) {
-                richtung = 0;
-            }
-            if (currentposy > (h-55)) {
-                richtung = 3;
-            }
-            if (currentposy < 10) {
-                richtung = 2;
-            }
-
-
-            if (sollRichtungAendern)
-            {
-                richtung = Math.floor(Math.random() * 4);
-            }            
-
-           if (richtung == 0) {
+        if (richtung == 0) {
             xPos = currentposx + 1;
             yPos = currentposy;
 
             currentposx = xPos;
             currentposy = yPos;
-            
-            repositionGhost();
-           }
 
-           if (richtung == 1) {
-            xPos = currentposx -1;
+            repositionGhost();
+        }
+
+        if (richtung == 1) {
+            xPos = currentposx - 1;
             yPos = currentposy;
 
             currentposx = xPos;
             currentposy = yPos;
-            
-            repositionGhost();
-           }
 
-           if (richtung == 2) {
+            repositionGhost();
+        }
+
+        if (richtung == 2) {
             xPos = currentposx;
-            yPos = currentposy +1;
+            yPos = currentposy + 1;
 
             currentposx = xPos;
             currentposy = yPos;
-            
-            repositionGhost();
-           }
 
-           if (richtung == 3) {
+            repositionGhost();
+        }
+
+        if (richtung == 3) {
             xPos = currentposx;
-            yPos = currentposy -1;
+            yPos = currentposy - 1;
 
             currentposx = xPos;
             currentposy = yPos;
-            
+
             repositionGhost();
-           }
-
-            setTimeout(repositionGhostRandom, 0.1);
         }
 
-        var repositionGhost = function() {
-            var box = document.getElementById("geist");
-            box.style.left = currentposx;
-            box.style.top = currentposy;
-        }
+        setTimeout(repositionGhostRandom, 0.1);
+    }
 
-        setTimeout(repositionGhostRandom, 1);
-        
-        
-        window.onresize = function(event) {
-            initPlayground();
-        }
-        var initPlayground = function(event) {
-            var hclient = document.body.clientHeight;
-            var wclient = document.body.clientWidth;
-            var h = hclient-22;
-            var w = wclient-20;
-            var box = document.getElementById("box");
-            var ende = document.getElementById("end");
-            var anfang = document.getElementById("start");
-            box.style.height = h;
-            box.style.width = w;
-            ende.style.height = hclient;
-            ende.style.width = wclient;
-            anfang.style.height = hclient;
-            anfang.style.width = wclient;
-            
-        }
-        
+    var repositionGhost = function () {
+        var box = document.getElementById("geist");
+        box.style.left = currentposx;
+        box.style.top = currentposy;
+    }
+
+    setTimeout(repositionGhostRandom, 1);
+
+
+    window.onresize = function (event) {
         initPlayground();
+    }
+    var initPlayground = function (event) {
+        var hclient = document.body.clientHeight;
+        var wclient = document.body.clientWidth;
+        var h = hclient - 22;
+        var w = wclient - 20;
+        var box = document.getElementById("box");
+        var ende = document.getElementById("end");
+        var anfang = document.getElementById("start");
+        box.style.height = h;
+        box.style.width = w;
+        ende.style.height = hclient;
+        ende.style.width = wclient;
+        anfang.style.height = hclient;
+        anfang.style.width = wclient;
+
+    }
+
+    initPlayground();
+
+    var counter = 1;
+    document.getElementById("punkte").innerText = "0";
+
+    function treffer(ev) {
+        var punkte = counter++;
+        document.getElementById("punkte").innerText = punkte;
+        document.getElementById("endpunktzahl").innerText = punkte;
+        var audio = new Audio('hit.mp3');
+        audio.play();
+        var name = document.getElementById("name").value;
+
+        if (punkte == 1) {
+            countdown();
+        }
+
+        ev.stopPropagation();
+
+        if (punkte > localStorage.getItem('score')) {
+            localStorage.clear();
+            localStorage.setItem('score', punkte);
+            localStorage.setItem('name', name);
+        }
         
-        var counter = 1;
+        var geist = document.getElementById("geist");
+        geist.src = "geisttot.png";
+
+        setTimeout(geistnormal, 200);
+
+        function geistnormal() {
+            document.getElementById("geist").src = "geist.png";
+        }    
+        
+    }
+
+
+
+    document.getElementById("timer").innerText = "15";
+
+    function countdown() {
+        var countertimer = timer--;
+        document.getElementById("timer").innerText = countertimer;
+        var punkte = localStorage.getItem('score');
+        var name = localStorage.getItem('name');
+
+        if (countertimer < 0) {
+            document.getElementById("timer").innerText = "0";
+            hidden.style.visibility = "visible";
+            hiddenbox.style.visibility = "hidden";
+
+        }
+        if (countertimer == 0) {
+            document.getElementById("nameend").innerText = name;
+            document.getElementById("punkteend").innerText = punkte;
+        }
+
+        setTimeout(countdown, 1000);
+
+    }
+
+
+
+    function restart() {
+        timer = 10000000000000000000000;
         document.getElementById("punkte").innerText = "0";
+        hidden.style.visibility = "hidden";
+        hiddenstart.style.visibility = "visible";
+        counter = 1;
 
-        function treffer( ev) {
-            var punkte = counter++;
-            document.getElementById("punkte").innerText = punkte;
-            document.getElementById("endpunktzahl").innerText = punkte;
-            var audio = new Audio('hit.mp3');
-            audio.play();
-
-            ev.stopPropagation();
-        }
-
-        
-        
-
-        timer = 15;
-        document.getElementById("timer").innerText = "30";
-
-        function countdown() {
-            var countertimer = timer--;
-            document.getElementById("timer").innerText = countertimer;
-            setTimeout(countdown, 1000);
-
-            if (countertimer <= 0) {
-                document.getElementById("timer").innerText = "0";
-                hidden.style.visibility = "visible";
-                hiddenbox.style.visibility = "hidden";
-            }
-        }
-
-
-        function restart() {
-            timer = 15;
-            document.getElementById("punkte").innerText = "0";
-            hidden.style.visibility = "hidden";
-            hiddenbox.style.visibility = "visible";
-            counter = 1
-
-        }
-    
-    </script>
+    }
+</script>
 
 
 </html>
-
