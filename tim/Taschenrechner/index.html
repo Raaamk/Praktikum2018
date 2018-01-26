@@ -88,7 +88,7 @@
 
 
 
-   
+
 
 
 
@@ -145,11 +145,10 @@
 
     function handleNumber(n) {
 
-      if (operatorpressed==true) {
-        currentValue = n 
-        
-      }
-      else {
+      if (operatorpressed == true) {
+        currentValue = n
+
+      } else {
         currentValue = currentValue * 10 + n
       }
       console.log("X:", currentValue)
@@ -170,10 +169,10 @@
       // wert merken
       savedValue = currentValue;
 
-     
+
 
     }
-   
+
 
     ele0.addEventListener('click', function () {
       handleNumber(0)
@@ -219,9 +218,10 @@
     eleDividieren.addEventListener('click', function () {
       handleOperator("/")
     })
-    eleLöschen.addEventListener('click', function () { handleLöschen ("c")})
+    eleLöschen.addEventListener('click', function () {
+      handleLöschen("c")
+    })
     eleGleich.addEventListener('click', handleGleich);
-   
   </script>
 
   <style>
