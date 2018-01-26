@@ -213,10 +213,6 @@
         audio.play();
         var name = document.getElementById("name").value;
 
-        if (punkte == 1) {
-            countdown();
-        }
-
         ev.stopPropagation();
 
         if (punkte > localStorage.getItem('score')) {
