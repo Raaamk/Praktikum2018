@@ -55,6 +55,11 @@
 
 <script>
     var timer;
+    countdown();
+    var fps = 60;
+    var dauerprobildinms = 1000/fps;
+    var schrittweiteproms = 0.2;
+    var schrittweiteproframe = schrittweiteproms * dauerprobildinms;
 
     function keintreffer() {
         var audio = new Audio('nohit.mp3');
@@ -79,9 +84,6 @@
     hiddenstart.style.visibility = "visible";
 
     var ghosts = [
-        ["geist1", 100, 200, 1],
-        ["geist2", 200, 200, 2],
-        ["geist3", 300, 200, 0]
     ];
 
 
@@ -95,9 +97,15 @@
             hiddenstart.style.visibility = "hidden";
             hiddenbox.style.visibility = "visible";
             timer = 15;
-            counter = 1;
+            counter = 0;
             document.getElementById("box").style.cursor = "url('cur.cur'), auto";
+            for (i=0; i<10;i++)
+{            addHosts(10);
+}
         }
+
+        
+
     }
 
     var repositionAllGhostsRandom = function () {
@@ -106,94 +114,95 @@
             repositionGhostRandom(element)
         });
 
+        setTimeout(repositionAllGhostsRandom, dauerprobildinms);
+
     }
-    var currentposx = ghost[1];
-        var currentposy = ghost[2];
-        var richtung = ghost[3];
 
     var repositionGhostRandom = function (ghost) {
         // Richtung ändern, aber nur mit x% Wahrscheilichkeit
         var sollRichtungAendern = Math.random() > 0.99 ? true : false;
 
-        var currentposx = ghost[1];
+        /*var currentposx = ghost[1];
         var currentposy = ghost[2];
-        var richtung = ghost[3];
+        var richtung = ghost[3];*/
+
+        var schrittweiteproframe = ghost[4] * dauerprobildinms;
 
         var hclient = document.body.clientHeight;
         var wclient = document.body.clientWidth;
         var h = hclient - 22;
         var w = wclient - 20;
 
-        if (currentposx > (w - 60)) {
-            richtung = 1;
+        if (ghost[1] > (w - 60)) {
+            ghost[3] = 1;
         }
-        if (currentposx < 10) {
-            richtung = 0;
+        if (ghost[1] < 10) {
+            ghost[3] = 0;
         }
-        if (currentposy > (h - 55)) {
-            richtung = 3;
+        if (ghost[2] > (h - 55)) {
+            ghost[3] = 3;
         }
-        if (currentposy < 10) {
-            richtung = 2;
+        if (ghost[2] < 10) {
+            ghost[3] = 2;
         }
 
 
         if (sollRichtungAendern) {
-            richtung = Math.floor(Math.random() * 4);
+            ghost[3] = Math.floor(Math.random() * 4);
         }
 
-        if (richtung == 0) {
-            xPos = currentposx + 1;
-            yPos = currentposy;
+        if (ghost[3] == 0) {
+            xPos = ghost[1] + schrittweiteproframe;
+            yPos = ghost[2];
 
-            currentposx = xPos;
-            currentposy = yPos;
+            ghost[1] = xPos;
+            ghost[2] = yPos;
 
             repositionGhost(ghost);
         }
 
-        if (richtung == 1) {
-            xPos = currentposx - 1;
-            yPos = currentposy;
+        if (ghost[3] == 1) {
+            xPos = ghost[1] - schrittweiteproframe;
+            yPos = ghost[2];
 
-            currentposx = xPos;
-            currentposy = yPos;
-
-            repositionGhost(ghost);
-        }
-
-        if (richtung == 2) {
-            xPos = currentposx;
-            yPos = currentposy + 1;
-
-            currentposx = xPos;
-            currentposy = yPos;
+            ghost[1] = xPos;
+            ghost[2] = yPos;
 
             repositionGhost(ghost);
         }
 
-        if (richtung == 3) {
-            xPos = currentposx;
-            yPos = currentposy - 1;
+        if (ghost[3] == 2) {
+            xPos = ghost[1];
+            yPos = ghost[2] + schrittweiteproframe;
 
-            currentposx = xPos;
-            currentposy = yPos;
+            ghost[1] = xPos;
+            ghost[2] = yPos;
 
             repositionGhost(ghost);
         }
 
-        setTimeout(repositionAllGhostsRandom, 0.1);
+        if (ghost[3] == 3) {
+            xPos = ghost[1];
+            yPos = ghost[2] - schrittweiteproframe;
+
+            ghost[1] = xPos;
+            ghost[2] = yPos;
+
+            repositionGhost(ghost);
+        }
+
+       
 
         function repositionGhost (ghost) {
         var box = document.getElementById(ghost[0]);
-        box.style.left = currentposx;
-        box.style.top = currentposy;
+        box.style.left = ghost[1];
+        box.style.top = ghost[2];
     }
     }
 
     
 
-    setTimeout(repositionAllGhostsRandom, 1);
+    setTimeout(repositionAllGhostsRandom, 1000);
 
 
     window.onresize = function (event) {
@@ -220,7 +229,6 @@
         });
 
 
-
     }
 
     function createGhost(ghost) {
@@ -238,22 +246,18 @@
         geist.src = "geist.png";
         geist.onclick = function (ev) {
             
-            var punkte = counter++;
-            document.getElementById("punkte").innerText = punkte;
-            document.getElementById("endpunktzahl").innerText = punkte;
+            counter += ghost[4] *10;
+            document.getElementById("punkte").innerText = counter;
+            document.getElementById("endpunktzahl").innerText = counter;
             var audio = new Audio('hit.mp3');
             audio.play();
             var name = document.getElementById("name").value;
 
-            if (punkte == 1) {
-                countdown();
-            }
-
             ev.stopPropagation();
 
-            if (punkte > localStorage.getItem('score')) {
+            if (counter > localStorage.getItem('score')) {
                 localStorage.clear();
-                localStorage.setItem('score', punkte);
+                localStorage.setItem('score', counter);
                 localStorage.setItem('name', name);
             }
 
@@ -272,7 +276,7 @@
 
     initPlayground();
 
-    var counter = 1;
+    var counter = 0;
     document.getElementById("punkte").innerText = "0";
 
 
@@ -301,14 +305,21 @@
 
     }
 
-
+function addHosts(n)
+{
+    var geschwindigkeit =  Math.floor(Math.random() * 4) / 10 + 0.1;
+    ghosts.push(["x"+ ghosts.length, 100, 100, 0,  geschwindigkeit])
+    createGhost(ghosts[ghosts.length-1]);
+}
 
     function restart() {
         timer = 10000000000000000000000;
         document.getElementById("punkte").innerText = "0";
         hidden.style.visibility = "hidden";
         hiddenstart.style.visibility = "visible";
-        counter = 1;
+        counter = 0;
+
+        addHosts(10);
 
     }
 </script>
