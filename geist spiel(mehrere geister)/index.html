@@ -4,7 +4,7 @@
     <title>Geist Spiel</title>
 </head>
 
-<body>
+<body onload="init()">
     <!--Spielbreich!-->
     <div id="box" style="border-style: solid;" onclick="keintreffer()" style="-ms-user-select: None; 
             -moz-user-select: None; -webkit-user-select: None; user-select: None;">
@@ -322,6 +322,11 @@ function addHosts(n)
         addHosts(10);
 
     }
+
+
+    var db = openDatabae('mydb', '1.0', 'My tasks', 5*1024*1024)
+
+    function init() 
 </script>
 
 
