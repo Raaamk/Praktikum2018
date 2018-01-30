@@ -1,0 +1,17 @@
+{
+  "name": "gameoflife",
+  "version": "1.0.0",
+  "description": "",
+  "main": "get-next-cell.js",
+  "scripts": {
+    "test:w": "jest --watch",
+    "test": "jest",
+    "start": "node test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^22.1.4"
+  }
+}
