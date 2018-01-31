@@ -5,13 +5,94 @@
 </head>
 
 <body>
-    
+    <div id="feld"></div>
 </body>
 
 <style>
-  
+  .dead {
+      background-color: black;
+      border-color: white;
+  }
+  .living {
+      background-color: rgb(0, 255, 13);
+      border-color: white;
+  }
 </style>
    
-<script></script>
+<script>
+    var gitter = [];
+
+    //Anzahl der Reihen ändern
+    var anzahlrow = 30;
+    //Anzahl an der Spalten ändern
+    var anzahlcolumn = 30;
+
+    // initGround();
+    // window.onresize(function(event){
+    //     initGround();
+    // });
+    
+    // var initGround = function (event) {
+    //     var hclient = document.body.clientHeight;
+    //     var wclient = document.body.clientWidth;
+    //     anzahlrow = hclient/20;
+    //     anzahlcolumn = wclient/20;
+    // }
+    
+    for (i=0; i< anzahlrow; i++) {
+        initArrayRow();
+    }
+    
+    function initArrayRow() {
+        var row = [];
+        for (j=0; j< anzahlcolumn; j++) {
+            var b = Math.floor(Math.random() + 0.1);
+            
+            row.push(b);
+        }
+        gitter.push(row)
+    }
+
+
+
+    var id = 1;
+    
+    var anzahlzeilen = gitter.length;
+    var anzahlspalten = gitter[0].length;
+
+    
+    
+    
+    for (i=0; i<anzahlzeilen; i++) {
+        for (j=0; j<anzahlspalten; j++) {
+        initCell(i, j);
+        }  
+         }
+    
+    function initCell(i, j) {
+        var iderstellen = id++;
+        var feld =  document.getElementById("feld");
+        var zelle = document.createElement("div");
+        feld.appendChild(zelle);
+        zelle.id = "zelle" + iderstellen;
+        zelle.style.position = "absolute";
+        zelle.style.margin = "0px";
+        zelle.style.padding = "0px";
+        zelle.style.height = "20px";
+        zelle.style.width = "20px";
+        zelle.style.left = j*20 + "px";
+        zelle.style.top = i*20 + "px";
+        zelle.style.borderStyle = "solid";
+        if (gitter[i][j] < 0.5) {
+            zelle.classList = "dead";
+        } else {
+            zelle.classList = "living";
+        }
+        
+
+
+    }
+    
+</script>
 
 </html>
