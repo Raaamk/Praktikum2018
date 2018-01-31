@@ -27,11 +27,11 @@ describe('gof - board', () => {
     expect(cell).toBe(1);
   });
 
-  it('should alive two other neighbours', () => {
+  it('should born new cell', () => {
     let fields = [
-      [1, 0, 0],
-      [0, 1, 0],
-      [0, 0, 1],
+      [1, 1, 1],
+      [0, 0, 0],
+      [0, 0, 0],
     ]
     const cell = getNextCell(
       fields
@@ -39,5 +39,16 @@ describe('gof - board', () => {
     expect(cell).toBe(1);
   });
 
-
+  it('should die four other neighbours - overcrouded', () => {
+    let fields = [
+      [1, 0, 1],
+      [1, 1, 0],
+      [0, 0, 1],
+    ]
+    const cell = getNextCell(
+      fields
+    );
+    expect(cell).toBe(1);
+  });
+setTimeout(getNextCell, 1000);
 });
