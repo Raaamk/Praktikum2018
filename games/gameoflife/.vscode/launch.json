@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///C:/Users/JanitscM/Documents/Internetseite/gameoflife/index.html",
+            "url": "file:///C:/Users/JanitscM/Documents/Internetseite/games/gameoflife/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]

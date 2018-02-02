@@ -23,21 +23,18 @@
     var gitter = [];
 
     //Anzahl der Reihen ändern
-    var anzahlrow = 30;
+    var anzahlrow = document.body.clientHeight/20-2;
     //Anzahl an der Spalten ändern
-    var anzahlcolumn = 30;
+    var anzahlcolumn = document.body.clientWidth/20-1;
 
-    // initGround();
-    // window.onresize(function(event){
+    // window.onresize = function (event) {
     //     initGround();
-    // });
+    // }
     
     // var initGround = function (event) {
-    //     var hclient = document.body.clientHeight;
-    //     var wclient = document.body.clientWidth;
-    //     anzahlrow = hclient/20;
-    //     anzahlcolumn = wclient/20;
+        
     // }
+    // initGround();
     
     for (i=0; i< anzahlrow; i++) {
         initArrayRow();
