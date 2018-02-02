@@ -24,11 +24,12 @@
     var h = 1; // werden durch positiomGHround neu gesetzt
     var w = 1;
     var ground = [];
+    var nextground = [];
 
     //Anzahl der Reihen initialisiert
-    var anzahlrow = 200;
+    var anzahlrow = 120;
     //Anzahl an der Spalten initialisiert
-    var anzahlcolumn = 200;
+    var anzahlcolumn = 120;
     var bigborder = 0;
     var smallborder = 0;
     var border_height = bigborder;
@@ -69,12 +70,15 @@
 
     function initArrayRow() {
         var row = [];
+        var nextrow = [];
         for (y = 0; y < anzahlcolumn; y++) {
-            var b = Math.floor(Math.random() + 0.1);
+            var b = Math.floor(Math.random() + 0.051);
 
             row.push(b);
+            nextrow.push(b);
         }
         ground.push(row)
+        nextground.push(nextrow)
     }
 
 
@@ -141,10 +145,12 @@
             }
         }
 
+       ground = nextground.slice();
+        redrawZellen();
         setTimeout(recalculateZellen, 100);
     }
 
-    function recalculateCell(x, y) {
+    function recalculateCell2(x, y) {
 
         var neighbourCount = 0;
         var realx = 0;
@@ -283,6 +289,145 @@
         redrawCell(x, y);
 
 
+    }
+
+
+    function recalculateCell(x, y) {
+
+        var neighbourCount = 0;
+        var realx = 0;
+        var realy = 0;
+
+        //rechter Nachbar
+        if (x == anzahlcolumn - 1) {
+
+        } else {
+            realx = x + 1;
+            realy = y;
+            neighbourCount += ground[realx][realy];
+        }
+        
+
+        //linker Nachbar
+        if (x == 0) {
+  
+        } else {
+            realx = x - 1;
+            realy = y;
+            neighbourCount += ground[realx][realy];
+        }
+       
+
+        //untere Nachbar
+        if (y == anzahlrow - 1) {
+
+        } else {
+            realx = x;
+            realy = y + 1;
+            neighbourCount += ground[realx][realy];
+        }
+        
+
+        //obere Nachbar
+        if (y == 0) {
+
+        } else {
+            realx = x;
+            realy = y - 1;
+            neighbourCount += ground[realx][realy];
+        }
+   
+
+        //oberer-rechter Nachbar
+        if (x == anzahlcolumn - 1 || y == 0) {
+
+
+        } else {
+            realx = x + 1;
+            realy = y - 1;
+            neighbourCount += ground[realx][realy];
+        }
+      
+
+        //unterer-rechter Nachbar
+        if (x == anzahlcolumn - 1 || y == anzahlrow - 1) {
+
+        } else {
+            realx = x + 1;
+            realy = y + 1;
+            neighbourCount += ground[realx][realy];
+        }
+       
+
+        //unterer-linker Nachbar
+        if (x == 0 || y == anzahlrow - 1) {
+
+
+
+        } else {
+            realx = x - 1;
+            realy = y + 1;
+            neighbourCount += ground[realx][realy];
+        }
+      
+
+        //oberer-linker Nachbar
+        if (x == 0 || y == 0) {
+
+
+        } else {
+            realx = x - 1;
+            realy = y - 1;
+            neighbourCount += ground[realx][realy];
+        }
+   
+// Rules:
+
+    nextground[x][y] = ground[x][y];
+      if (ground[x][y] == 0) {
+            if (neighbourCount == 3) {
+                nextground[x][y] = 1;
+            }
+        } else {
+            if (neighbourCount < 2 || neighbourCount > 3) {
+
+
+                nextground[x][y] = 0;
+            }
+        }
+
+
+				/*var c = ground[x][y];
+switch (neighbourCount) {
+					case 0:
+					case 1:
+						c = 0;
+						break;
+					case 2:
+						break; 
+					case 3:
+						c = 1;
+						break;
+					default:
+						c = 0;
+				}
+				nextground[x][y] = c;
+                */
+
+        //redrawCell(x, y);
+
+
+    }
+
+    function redrawZellen() {
+        var anzahlzeilen = ground.length;
+        var anzahlspalten = ground[0].length;
+
+        for (var x = 0; x < anzahlzeilen; x++) {
+            for (var y = 0; y < anzahlspalten; y++) {
+                redrawCell(x, y);
+            }
+        }
     }
 
     function redrawCell(x, y) {
