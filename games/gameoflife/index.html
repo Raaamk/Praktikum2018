@@ -23,6 +23,7 @@
 <script>
     var h = 1; // werden durch positiomGHround neu gesetzt
     var w = 1;
+    var ground = [];
 
     //Anzahl der Reihen initialisiert
     var anzahlrow = 10;
@@ -32,7 +33,7 @@
     var smallborder = 0;
     var border_height = bigborder;
 
-    var ground = [];
+    
     createGround();
     positionGround();
 
@@ -148,7 +149,7 @@
         var realy = 0;
 
         //rechter Nachbar
-        if (x>=anzahlcolumn-1) {
+        if (x==anzahlcolumn-1) {
             realx = 0; realy=y;
         } else {
             realx = x+1; realy=y;
@@ -156,7 +157,7 @@
         neighbourCount += ground[realx][realy];
 
         //linker Nachbar
-        if (x<=anzahlcolumn-1) {
+        if (x==0) {
             realx = anzahlrow-1; realy=y;
         } else {
             realx = x-1; realy=y;
@@ -164,7 +165,7 @@
         neighbourCount += ground[realx][realy];
 
         //untere Nachbar
-        if (y>=anzahlrow-1) {
+        if (y==anzahlrow-1) {
             realx = x; realy= 0;
         } else {
             realx = x; realy=y-1;
@@ -172,7 +173,7 @@
         neighbourCount += ground[realx][realy];
 
         //obere Nachbar
-        if (y<=anzahlrow-1) {
+        if (y==0) {
             realx =x; realy= anzahlcolumn-1;
         } else {
             realx = x; realy=y+1;
@@ -180,7 +181,7 @@
         neighbourCount += ground[realx][realy];
 
         //oberer-rechter Nachbar
-        if (x>=anzahlcolumn-1 && y<=anzahlrow-1) {
+        if (x==anzahlcolumn-1 || y==0) {
             realx = 0; realy= y-1;
         } else {
             realx = x+1; realy=y-1;
@@ -188,7 +189,7 @@
         neighbourCount += ground[realx][realy];
 
         //unterer-rechter Nachbar
-        if (x>=anzahlcolumn-1 && y>=anzahlrow) {
+        if (x==anzahlcolumn-1 || y==anzahlrow-1) {
             realx = 0; realy=y+1;
         } else {
             realx = x+1; realy=y+1;
@@ -196,15 +197,15 @@
         neighbourCount += ground[realx][realy];
 
         //unterer-linker Nachbar
-        // if (x<=anzahlcolumn-1 && y>=anzahlrow) {
-        //     realx = anzahlrow-1; realy=y+1;
-        // } else {
-        //     realx = x-1; realy=y+1;
-        // }
-        // neighbourCount += ground[realx][realy];
+        if (x==0 && y==anzahlrow-1) {
+            realx = anzahlrow-1; realy=y+1;
+        } else {
+            realx = x-1; realy=y+1;
+        }
+        neighbourCount += ground[realx][realy];
 
          //oberer-linker Nachbar
-         if (x<=anzahlcolumn-1 && y<=anzahlrow) {
+         if (x==0 && y==0) {
             realx = anzahlrow-1; realy=y-1;
         } else {
             realx = x-1; realy=y-1;
